@@ -1,12 +1,13 @@
 <html>
 <head>
-  
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="author" content="Sajith Amma" />
   
 <script src="jquery.min.js"> </script>
 <script src="jRecorder.js"> </script>
 
-<title>jRecorder Example</title>  
+<title>jRecorder实例1</title>  
 
 <style>
 
@@ -19,22 +20,19 @@ li {display:inline; margin-right:10px;}
 
 <body>
 	
-    <li><p>Author:<a href="http://www.sajithmr.me" target="_blank">Sajith Amma</a></p></li>
+    <li><p>作者：<a href="http://www.sajithmr.me" target="_blank">Sajith Amma</a></p></li>
    
-    <h3>jRecorder Example 1 - Insert flash recorder inside the body tag</h3>
+    <h3>jRecorder 实例1 - 将录音器写在body标签中</h3>
 
-    <p>In this example, you add a flash recorder with some call  back function. $.jRecorder function is called with all initial settings.
-    If the second parameter for $.jRecorder is not there, plugin insert the flash recorder inside the body tag. You can specify where to insert
-    the flash recorder with second parameter. See <a href="example2.html">example2.html</a> for this.
+    <p>在本实例中, 我们使用带有回调方法的录音器。调用$.jRecorder方法初始化设置。如果没有给$.jRecorder传入第二个参数，插件会将录音器写在body标签中。你也可以使用第二个参数来设置录音器写入的位置，查看<a href="example2_chs.html">example2_chs.html</a>。
     </p>
-
 
 <script>
    
    $.jRecorder(
      
      { 
-        host : 'http://yourdomain.com/acceptfile.php?filename=hello.wav' ,  //replace with your server path please
+        host : 'http://localhost/jRecorder/html/acceptfile.php?filename=hello.wav' ,  //用你的服务器地址替换
         
         callback_started_recording:     function(){callback_started(); },
         callback_stopped_recording:     function(){callback_stopped(); },
@@ -56,13 +54,13 @@ li {display:inline; margin-right:10px;}
 
 <div style="background-color: #eeeeee;border:1px solid #cccccc">
   
-  Time: <span id="time">00:00</span>
+  时间: <span id="time">00:00</span>
   
 </div>
 
 
 <div>
-  Level: <span id="level"></span>
+  音量: <span id="level"></span>
 </div>  
 
 <div id="levelbase" style="width:200px;height:20px;background-color:#ffff00">
@@ -72,42 +70,46 @@ li {display:inline; margin-right:10px;}
 </div>
 
 <div>
-  Status: <span id="status"></status>
+  状态: <span id="status"></status>
 </div> 
 
 
 <div>
   
-<input type="button" id="record" value="Record" style="color:red">  
-<p>This Record button trigger the record event. See the javascript example in the bottom of the page. (View Source in your browser).
+<input type="button" id="record" value="录音" style="color:red">  
+<p>录音按钮会触发record事件，详情可查看页面源代码底部的javascript代码。
   
-<pre>
-$('#record').click(function(){
-                    
-    $.jRecorder.record(30); //record up to 30 sec and stops automatically
-                   
-   })
-</pre>
-  </p>  
+  <pre>
+	$('#record').click(function(){
 
+		$.jRecorder.record(30); //录音超过30秒将自动停止
+	
+	})
+  </pre>
+  </p>  
 
 <hr/>
 
-<input type="button" id="stop" value="Stop">
+<input type="button" id="stop" value="停止">
 
-<p>This Stop button trigger the stop record event. 
+<p>停止按钮会触发stop事件。点击该按钮，停止录音，并自动播放。
   
   <pre>
-  Onclick of this button trigger  $.jRecorder.sendData() which send the data to the Server
+	$('#stop').click(function(){
+                    
+		$.jRecorder.stop();
+		
+	})
   </pre>
   
 </p>
 
 <hr/>
 
-<input type="button" id="send" value="Send Data">
+<input type="button" id="send" value="提交">
 
-<p>This SendData button trigger the sendData event to flash to send the wav data to Server (configured in the host parameter).
+<p>提交按钮触发sendData事件，将录音以wav形式发送到服务器中（查看acceptfile.php中的保存方式）。
+
 
   <pre>
 	$.jRecorder({
@@ -115,25 +117,12 @@ $('#record').click(function(){
 		host : 'http://localhost/jRecorder/html/acceptfile.php?filename=hello.wav'
 	
 	})
-	You need replace with your full path to reciever php file.
+	在你配置实例时，请将host修改为你的主机地址。
   </pre>
   
 </p>
   
 <hr/>
-  
-<pre>
-$('#stop').click(function(){
-                    
-    $.jRecorder.stop();
-                   
-   })
-</pre>
-  </p>  
-
-
-<hr/>
-
 
 </div>
 
@@ -141,20 +130,18 @@ $('#stop').click(function(){
  
 
 <p>
-  Time area is used to update the time. There is an event Listener which update the recording time dynamically.
+  时间区域用来更新时间。有一个事件侦听器动态更新记录时间。
   <pre>
-    
-    callback_activityTime:     function(time){callback_activityTime(time);  //see the initialisation
-    
-    //function callback
-    function callback_activityTime(time)
-     {
-      
-      
-       $('#time').html(time);
-       
-     }
-    
+
+	callback_activityTime:     function(time){callback_activityTime(time);  //查看代码的初始化部分
+
+	//function callback
+	function callback_activityTime(time) {
+
+		$('#time').html(time);
+	
+	}
+	
   </pre>  
 </p>
 

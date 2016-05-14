@@ -5,7 +5,7 @@
      exit('No file');
    }
 
-   $upload_path = dirname(__FILE__). '/';
+   $upload_path = dirname(__FILE__);
    
    $filename = $_REQUEST['filename'];
    

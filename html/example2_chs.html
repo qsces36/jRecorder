@@ -1,26 +1,26 @@
 <html>
 <head>
-  
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="author" content="Sajith Amma" />
   
 <script src="jquery.min.js"> </script>
 <script src="jRecorder.js"> </script>
 
 
-<title>jRecorder Example</title>  
+<title>jRecorder实例2</title>  
 
  
 </head>
 
 
-<body>
+<body> 
 	
-    <li><p>Author:<a href="http://www.sajithmr.me" target="_blank">Sajith Amma</a></p></li>
+    <li><p>作者：<a href="http://www.sajithmr.me" target="_blank">Sajith Amma</a></p></li>
 
-    <h3>jRecorder Example 2 - Insert flash recorder inside a particular element</h3>
+    <h3>jRecorder 实例2 - 将录音器写入到特定的元素中</h3>
 
-    <p>In this example, you add a flash recorder with some call  back function. $.jRecorder function is called with all initial settings and a second parameter 
-    indicate where to insert this recorder. <u>Call the $.jRecorder script only after the div. (Better to use javascript at the bottom always, or you can use $(document).ready function)</u> See <a href="example1.html">example1.html</a>  for inserting this inside body tag.
+    <p>在该实例中, 我们使用带有回调方法的录音器。调用$.jRecorder方法初始化设置并传入第二个参数用于标识录音器写入位置（写入到div中）。<u>在编写网页时$.jRecorder脚本必须在写入div之后（更佳的编程习惯是总将javascript脚本写在页面底部，或者写入到$(document).ready(function{})中）。</u>  关于将录音器写入body标签中，请查看<a href="example1_chs.html">example1_chs.html</a>
     </p>
 </div>
 
@@ -54,13 +54,13 @@
 
 <div style="background-color: #eeeeee;border:1px solid #cccccc">
   
-  Time: <span id="time">00:00</span>
+  时间: <span id="time">00:00</span>
   
 </div>
 
 
 <div>
-  Level: <span id="level"></span>
+  音量: <span id="level"></span>
 </div>  
 
 <div id="levelbase" style="width:200px;height:20px;background-color:#ffff00">
@@ -70,60 +70,64 @@
 </div>
 
 <div>
-  Status: <span id="status"></status>
+  状态: <span id="status"></status>
 </div> 
 
 
 <div>
   
-<input type="button" id="record" value="Record" style="color:red">  
-<p>This Record button trigger the record event. See the javascript example in the bottom of the page. (View Source in your browser).
+<input type="button" id="record" value="录音" style="color:red">  
+<p>录音按钮会触发record事件，详情可查看页面源代码底部的javascript代码。
   
-<pre>
-$('#record').click(function(){
-                    
-    $.jRecorder.record(30); //record up to 30 sec and stops automatically
-                   
-   })
-</pre>
+  <pre>
+	$('#record').click(function(){
+
+		$.jRecorder.record(30); //录音超过30秒将自动停止
+	
+	})
+  </pre>
   </p>  
 
-
 <hr/>
 
-<input type="button" id="stop" value="Stop">
+<input type="button" id="stop" value="停止">
 
-<p>This Stop button trigger the stop record event.
-  
-<pre>
-$('#stop').click(function(){
-                    
-    $.jRecorder.stop();
-                   
-   })
-</pre>
-</p>
-<hr/>
-</div>
-<p>
-  Time area is used to update the time. There is an event Listener which update the recording time dynamically.
+<p>停止按钮会触发stop事件。点击该按钮，停止录音，并自动播放。
+    
   <pre>
-    
-    callback_activityTime:     function(time){callback_activityTime(time);  //see the initialisation
-    
-    //function callback
-    function callback_activityTime(time)
-     {
-      
-      
-       $('#time').html(time);
-       
-     }
-    
+	$('#stop').click(function(){
+                    
+		$.jRecorder.stop();
+		
+	})
+  </pre>
+  
+</p>
+
+<hr/>
+
+</div>
+
+<p>
+  时间区域用来更新时间。有一个事件侦听器动态更新记录时间。
+  <pre>
+
+	callback_activityTime:     function(time){callback_activityTime(time);  //查看代码的初始化部分
+
+	//function callback
+	function callback_activityTime(time) {
+
+		$('#time').html(time);
+	
+	}
+	
   </pre>  
 </p>
+
 </body>
 </html>
+
+
  <script type="text/javascript">
 	$('#record').click(function() {
 		$.jRecorder.record(30);
